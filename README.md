@@ -1,98 +1,161 @@
 # Cassandra Cluster with Python Client
 
-This project sets up a Cassandra cluster using Docker and provides a Python client application to interact with the cluster. The setup includes multiple Cassandra nodes and a Python client for database operations, designed to run inside the Docker environment.
+This project sets up a multi-node **Cassandra cluster using Docker Compose** and includes a **Python client** application to interact with the database. It is designed to run entirely inside Docker containers for ease of setup and portability.
 
-## Project Structure
+---
 
-```
+## 📁 Project Structure
+
+```text
 .
-├── docker-compose.yaml       # Docker Compose file to define the cluster and client services
-├── cassandra_client/         # Directory containing the Python client application
-│   ├── cassandraSimpleClientApp.py  # Main Python script for database operations
-│   ├── Dockerfile            # Dockerfile for the Python client
-│   ├── requirements.txt      # Python dependencies for the client
-│   ├── .dockerignore         # Docker ignore file for the Python client
-├── .env                      # Environment variables for configuration
-├── .gitignore                # Git ignore file
+├── docker-compose.yaml             # Defines Cassandra nodes and Python client service
+├── cassandra_client/              # Python client application
+│   ├── cassandraSimpleClientApp.py  # Main script for database operations
+│   ├── Dockerfile                 # Dockerfile for building the client image
+│   ├── requirements.txt           # Python dependencies
+│   ├── .dockerignore              # Docker ignore file
+├── start-cassandra-cluster.ps1    # PowerShell script to start the cluster on Windows
+├── run-cassandra-cluster.bat      # Batch file to launch the PowerShell script
+├── .env                           # Environment variable configuration
+├── .gitignore                     # Git ignore rules
+├── LICENSE                        # License file
+└── README.md                      # Project documentation
 ```
 
-## Prerequisites
+---
 
-- Docker and Docker Compose installed on your system.
+## ✅ Prerequisites
 
-## Setup Instructions
+- [Docker Desktop](https://www.docker.com/products/docker-desktop)
+- Windows PowerShell (for script users)
+- On Linux/macOS: Docker and Docker Compose CLI
+
+---
+
+## 🚀 Quick Start
 
 ### 1. Clone the Repository
 
 ```bash
-git https://github.com/mirslivjce/Cassandra_projects.git
+git clone https://github.com/mirslivjce/Cassandra_projects.git
 cd Cassandra_projects
 ```
 
 ### 2. Configure Environment Variables
 
-Update the `.env` file with your desired configuration. For example:
+Edit the `.env` file to set up cluster-related values:
 
-```
+```env
 CLUSTER_HOSTS=cassandra1,cassandra2,cassandra3,cassandra4
 CASSANDRA_PORT=9042
 ```
 
-### 3. Start the Cluster
+Ensure the hostnames match those defined in `docker-compose.yaml`.
 
-Run the following command to start the Cassandra cluster and the Python client:
+---
 
-```bash
-docker-compose up -d
+## ▶️ Starting the Cluster
+
+### On Windows
+
+Double-click or run from terminal:
+
+```cmd
+run-cassandra-cluster.bat
 ```
 
-### 4. Health Check Process
+Or run directly via PowerShell:
 
-Each Cassandra node is configured with a health check to ensure it is ready before dependent services start. The health check uses the `cqlsh` command to query the Cassandra system table. The health check parameters are defined in the `docker-compose.yaml` file:
+```powershell
+PowerShell -NoProfile -ExecutionPolicy Bypass -File start-cassandra-cluster.ps1
+```
 
-- **Test Command**: `cqlsh -e "SELECT release_version FROM system.local"`
+### On Linux/macOS
+
+Use Docker Compose directly:
+
+```bash
+docker compose up -d
+```
+
+---
+
+## 🔍 Health Check Process
+
+Each Cassandra node uses a built-in health check defined in `docker-compose.yaml`:
+
+- **Command**: `cqlsh -e "SELECT release_version FROM system.local"`
 - **Interval**: 30 seconds
 - **Start Period**: 300 seconds
 - **Timeout**: 20 seconds
 - **Retries**: 5
 
-The `depends_on` directive in the `docker-compose.yaml` file ensures that each node waits for the previous node to pass its health check before starting. Similarly, the Python client waits for the last Cassandra node to be healthy before starting.
+The Python client waits for the last Cassandra node to be healthy before starting.
 
-### 5. Interact with the Cluster
+---
 
-The Python client application (`cassandraSimpleClientApp.py`) is designed to run inside the Docker environment. To access the client container:
+## 💻 Using the Python Client
+
+To access and run the client application:
 
 ```bash
 docker exec -it cassandra-client bash
-```
-
-Once inside the container, you can run the Python script to perform CRUD operations on the Cassandra database:
-
-```bash
 python cassandraSimpleClientApp.py
 ```
 
-### 6. Stop the Cluster
+The client script demonstrates basic CRUD operations using the `cassandra-driver`.
 
-To stop and remove the containers, run:
+---
+
+## ⛔ Stopping the Cluster
+
+To stop and remove all running containers:
 
 ```bash
-docker-compose down
+docker compose down
 ```
 
-## Python Client
+---
 
-The Python client uses the `cassandra-driver` library to connect to the Cassandra cluster. It supports the following operations:
+## 🧰 Included Scripts
 
-- Create keyspaces and tables.
-- Insert, update, and delete records.
-- Query data from the database.
+### `start-cassandra-cluster.ps1`
 
-## Notes
+A PowerShell script to start the cluster on Windows. It:
 
-- The cluster is configured with 4 nodes. You can modify the `docker-compose.yaml` file to adjust the number of nodes.
-- Ensure that the `CLUSTER_HOSTS` environment variable matches the node hostnames defined in the `docker-compose.yaml` file.
+1. Checks if Docker is installed
+2. Launches Docker Desktop
+3. Waits for Docker to be ready
+4. Runs `docker compose up -d`
 
-## License
+#### Usage:
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+```powershell
+PowerShell -NoProfile -ExecutionPolicy Bypass -File start-cassandra-cluster.ps1
+```
+
+### `run-cassandra-cluster.bat`
+
+Simple `.bat` wrapper to run the PowerShell script. Just double-click it.
+
+---
+
+## 🐍 Python Client Features
+
+- Create keyspaces and tables
+- Insert, update, delete records
+- Query data from Cassandra using Python
+
+---
+
+## 📌 Notes
+
+- Cluster is configured with **4 nodes** by default. You can increase or reduce this by modifying `docker-compose.yaml`.
+- Ensure the `.env` file matches the container hostnames defined in the Compose file.
+- Scripts are designed for **Windows users**, but Docker Compose works cross-platform.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for full details.
