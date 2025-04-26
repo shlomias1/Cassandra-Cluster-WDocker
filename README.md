@@ -2,7 +2,8 @@
 # Installing and Using Cassandra Cluster on Docker for Teaching
 
 Dist. Algorithms Course / Dr. Miriam Allalouf
-Code Contribution / Ephi Cohen SW Lab Manager
+
+Code Contribution / **Ephi Cohen** SW Lab Manager
 
 Cassandra Cluster Installation
 
