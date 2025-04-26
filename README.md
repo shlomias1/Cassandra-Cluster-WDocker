@@ -1,10 +1,8 @@
-# Cassandra Guide – Dist. Algorithms Course / Dr. Miriam Allalouf
 
-Software Lab / Ephi Cohen
+# Installing and Using Cassandra Cluster on Docker for Teaching
 
----
-
-# Installing and Using Cassandra Cluster on Docker
+Dist. Algorithms Course / Dr. Miriam Allalouf
+Code Contribution / Ephi Cohen SW Lab Manager
 
 Cassandra Cluster Installation
 
@@ -108,7 +106,7 @@ More details about the install: <https://hub.docker.com/_/cassandra>
 - `docker cp cassandra.yaml cassandra1:/etc/cassandra`
   - Copy a file from your laptop to the container of Cassandra1.
 
-### Containers Management
+### Container Management
 
 - `docker stop cassandra1`
 - `docker restart cassandra1`
