@@ -48,7 +48,7 @@ This installation will run Cassandra using **Docker Compose** and provide a spec
 
    3. You can access Cassandra nodes via the holding containers. Follow the subsequent commands:
       1. Create a Docker icon for the Cassandra Docker by opening the VS Code extensions marketplace (press this icon ![](images/Aspose.Words.13bc9ca2-bd0c-4877-a47a-065e36f68c58.001.png)) and searching for Docker.
-      2. Select the Docker icon (![](images/Aspose.Words.13bc9ca2-bd0c-4877-a47a-065e36f68c58.002.png)) on the left-hand side of VS Code and find the relevant Docker and status of the five containers (four Cassandra nodes and one Cassandra Client).
+      2. Select the Docker icon (![](images/Aspose.Words.13bc9ca2-bd0c-4877-a47a-065e36f68c58.0020.png)) on the left-hand side of VS Code and find the relevant Docker and status of the five containers (four Cassandra nodes and one Cassandra Client).
       3. To access the database from the client node, press the Docker icon and find the container holding the Cassandra client. Right-click on this line and select the "Attach Shell" command. This will open a terminal for the client node. Type in the terminal the following commands:
          1. ```bash
             pwd
