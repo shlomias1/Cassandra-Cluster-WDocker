@@ -1,0 +1,118 @@
+
+=== UPDATE TRACE ===
+Coordinator: 172.18.0.3
+Duration: 0:00:00.110971 ms
+172.18.0.3 | Parsing 
+        INSERT INTO bird_tracking (bird_id, date, timestamp, species, latitude, longitude)
+        VALUES ('BIRD1', '2025-06-22', 1750669874237, 'stork', -18.625788591168302, 97.5533661527561)
+     | 0:00:00.018981 µs
+172.18.0.3 | Preparing statement | 0:00:00.032199 µs
+172.18.0.3 | Determining replicas for mutation | 0:00:00.065947 µs
+172.18.0.3 | Appending to commitlog | 0:00:00.094489 µs
+172.18.0.3 | Adding to bird_tracking memtable | 0:00:00.095040 µs
+172.18.0.3 | Sending MUTATION_REQ message to cassandra-1/172.18.0.2:7000 message size 148 bytes | 0:00:00.095469 µs
+172.18.0.2 | MUTATION_REQ message received from /172.18.0.3:7000 | 0:00:00.001074 µs
+172.18.0.3 | MUTATION_RSP message received from /172.18.0.2:7000 | 0:00:00.112340 µs
+172.18.0.3 | Processing response from /172.18.0.2:7000 | 0:00:00.112824 µs
+
+=== SELECT TRACE ===
+Coordinator: 172.18.0.3
+Duration: 0:00:00.048344 ms
+172.18.0.3 | Parsing 
+        SELECT * FROM bird_tracking
+        WHERE bird_id = 'BIRD1' AND date = '2025-06-22'
+        LIMIT 1
+     | 0:00:00.002297 µs
+172.18.0.3 | Preparing statement | 0:00:00.011906 µs
+172.18.0.3 | reading data from /172.18.0.2:7000 | 0:00:00.041665 µs
+172.18.0.3 | Sending READ_REQ message to cassandra-1/172.18.0.2:7000 message size 126 bytes | 0:00:00.042182 µs
+172.18.0.2 | READ_REQ message received from /172.18.0.3:7000 | 0:00:00.000025 µs
+172.18.0.2 | Executing single-partition query on bird_tracking | 0:00:00.000427 µs
+172.18.0.2 | Acquiring sstable references | 0:00:00.001254 µs
+172.18.0.2 | Skipped 0/1 non-slice-intersecting sstables, included 0 due to tombstones | 0:00:00.001507 µs
+172.18.0.2 | Merged data from memtables and 0 sstables | 0:00:00.001848 µs
+172.18.0.2 | Read 1 live rows and 0 tombstone cells | 0:00:00.001976 µs
+172.18.0.2 | Enqueuing response to /172.18.0.3:7000 | 0:00:00.002052 µs
+172.18.0.2 | Sending READ_RSP message to cassandra-2/172.18.0.3:7000 message size 115 bytes | 0:00:00.002717 µs
+172.18.0.3 | READ_RSP message received from /172.18.0.2:7000 | 0:00:00.047268 µs
+172.18.0.3 | Processing response from /172.18.0.2:7000 | 0:00:00.047552 µs
+
+=== UPDATE TRACE ===
+Coordinator: 172.18.0.3
+Duration: 0:00:00.014187 ms
+172.18.0.3 | Parsing 
+        INSERT INTO bird_tracking (bird_id, date, timestamp, species, latitude, longitude)
+        VALUES ('BIRD1', '2025-06-22', 1750669943858, 'stork', 12.880646223244625, -166.84465501060825)
+     | 0:00:00.000370 µs
+172.18.0.3 | Preparing statement | 0:00:00.001781 µs
+172.18.0.3 | Determining replicas for mutation | 0:00:00.002868 µs
+172.18.0.3 | Appending to commitlog | 0:00:00.012242 µs
+172.18.0.3 | Adding to bird_tracking memtable | 0:00:00.012462 µs
+172.18.0.3 | Sending MUTATION_REQ message to cassandra-1/172.18.0.2:7000 message size 148 bytes | None µs
+172.18.0.2 | MUTATION_REQ message received from /172.18.0.3:7000 | 0:00:00.000024 µs
+172.18.0.2 | Appending to commitlog | 0:00:00.004167 µs
+172.18.0.2 | Adding to bird_tracking memtable | 0:00:00.009560 µs
+172.18.0.2 | Enqueuing response to /172.18.0.3:7000 | 0:00:00.009757 µs
+172.18.0.2 | Sending MUTATION_RSP message to cassandra-2/172.18.0.3:7000 message size 33 bytes | 0:00:00.014641 µs
+
+=== SELECT TRACE ===
+Coordinator: 172.18.0.3
+Duration: 0:00:00.005702 ms
+172.18.0.3 | Parsing 
+        SELECT * FROM bird_tracking
+        WHERE bird_id = 'BIRD1' AND date = '2025-06-22'
+        LIMIT 1
+     | 0:00:00.000187 µs
+172.18.0.3 | Preparing statement | 0:00:00.000489 µs
+172.18.0.3 | Executing single-partition query on bird_tracking | 0:00:00.001137 µs
+172.18.0.3 | Acquiring sstable references | 0:00:00.001216 µs
+172.18.0.3 | Skipped 0/1 non-slice-intersecting sstables, included 0 due to tombstones | 0:00:00.001378 µs
+172.18.0.3 | Merged data from memtables and 0 sstables | 0:00:00.001695 µs
+172.18.0.3 | Read 1 live rows and 0 tombstone cells | 0:00:00.001801 µs
+
+=== UPDATE TRACE ===
+Coordinator: 172.18.0.2
+Duration: 0:00:00.010861 ms
+172.18.0.2 | Parsing 
+        INSERT INTO bird_tracking (bird_id, date, timestamp, species, latitude, longitude)
+        VALUES ('BIRD1', '2025-06-22', 1750670008558, 'stork', -88.95659759699514, 121.14427185831141)
+     | 0:00:00.000886 µs
+172.18.0.2 | Preparing statement | 0:00:00.004399 µs
+172.18.0.2 | Determining replicas for mutation | 0:00:00.009691 µs
+172.18.0.2 | Appending to commitlog | 0:00:00.010397 µs
+172.18.0.2 | Adding to bird_tracking memtable | 0:00:00.010561 µs
+172.18.0.3 | MUTATION_REQ message received from /172.18.0.2:7000 | 0:00:00.000036 µs
+172.18.0.3 | Appending to commitlog | 0:00:00.000389 µs
+172.18.0.3 | Adding to bird_tracking memtable | 0:00:00.000559 µs
+172.18.0.3 | Enqueuing response to /172.18.0.2:7000 | 0:00:00.000755 µs
+172.18.0.3 | Sending MUTATION_RSP message to cassandra-1/172.18.0.2:7000 message size 33 bytes | 0:00:00.000968 µs
+172.18.0.2 | MUTATION_RSP message received from /172.18.0.3:7000 | 0:00:00.000045 µs
+172.18.0.2 | Processing response from /172.18.0.3:7000 | 0:00:00.001045 µs
+172.18.0.2 | Sending MUTATION_REQ message to cassandra-2/172.18.0.3:7000 message size 148 bytes | None µs
+
+=== SELECT TRACE ===
+Coordinator: 172.18.0.3
+Duration: 0:00:00.026321 ms
+172.18.0.3 | Parsing 
+        SELECT * FROM bird_tracking
+        WHERE bird_id = 'BIRD1' AND date = '2025-06-22'
+        LIMIT 1
+     | 0:00:00.000223 µs
+172.18.0.3 | Preparing statement | 0:00:00.000562 µs
+172.18.0.3 | Executing single-partition query on bird_tracking | 0:00:00.017237 µs
+172.18.0.3 | Acquiring sstable references | 0:00:00.017395 µs
+172.18.0.3 | Skipped 0/1 non-slice-intersecting sstables, included 0 due to tombstones | 0:00:00.019248 µs
+172.18.0.3 | Merged data from memtables and 0 sstables | 0:00:00.019521 µs
+172.18.0.3 | Read 1 live rows and 0 tombstone cells | 0:00:00.019650 µs
+172.18.0.3 | speculating read retry on Full(/172.18.0.2:7000,(-4502897332937212891,-2804047790148917726]) | 0:00:00.019887 µs
+172.18.0.3 | Sending READ_REQ message to cassandra-1/172.18.0.2:7000 message size 126 bytes | 0:00:00.024442 µs
+172.18.0.2 | READ_REQ message received from /172.18.0.3:7000 | 0:00:00.000022 µs
+172.18.0.2 | Executing single-partition query on bird_tracking | 0:00:00.001571 µs
+172.18.0.2 | Acquiring sstable references | 0:00:00.001685 µs
+172.18.0.2 | Skipped 0/1 non-slice-intersecting sstables, included 0 due to tombstones | 0:00:00.001845 µs
+172.18.0.2 | Merged data from memtables and 0 sstables | 0:00:00.002152 µs
+172.18.0.2 | Read 1 live rows and 0 tombstone cells | 0:00:00.003372 µs
+172.18.0.2 | Enqueuing response to /172.18.0.3:7000 | 0:00:00.003811 µs
+172.18.0.2 | Sending READ_RSP message to cassandra-2/172.18.0.3:7000 message size 115 bytes | 0:00:00.008543 µs
+172.18.0.3 | READ_RSP message received from /172.18.0.2:7000 | 0:00:00.000019 µs
+172.18.0.3 | Processing response from /172.18.0.2:7000 | 0:00:00.000161 µs
