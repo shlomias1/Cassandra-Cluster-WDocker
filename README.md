@@ -1,10 +1,6 @@
 
 # Installing and Using Cassandra Cluster on Docker for Teaching
 
-Dist. Algorithms Course / Dr. Miriam Allalouf
-
-Code Contribution / **Ephi Cohen** SW Lab Manager
-
 Cassandra Cluster Installation
 
 A Cassandra cluster that is composed of multiple physical nodes requires separate installation and configuration of each server (here is the link: <https://cassandra.apache.org/doc/stable/cassandra/getting_started/installing.html>), enabling distributed data storage, mutual load balance, and lookup. Configuration files (`cassandra.yaml`, `cassandra-env.sh`, and more) are located in `/etc/cassandra` (<https://cassandra.apache.org/doc/stable/cassandra/getting_started/configuring.html>).
