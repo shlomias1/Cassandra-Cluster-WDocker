@@ -42,6 +42,4 @@ python3 cassandra_client/birds_tracking/trace_bird1_test.py
 * Replication factor: 3
 * Consistency level: `LOCAL_QUORUM`
 
-```
-
 ---
